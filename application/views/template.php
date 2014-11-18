@@ -29,7 +29,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<?php echo $content; ?>
+			<?php echo (!empty($content)) ? $content : ''; ?>
 
 		</div>
 	</div>
