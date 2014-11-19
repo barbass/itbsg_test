@@ -124,7 +124,9 @@ class Model_User extends Model
 				->rule('private_code', 'min_length', array(':value', 2))
 				->rule('private_code', 'max_length', array(':value', 45))
 
-				->rule('city', 'numeric');
+				->rule('city', 'numeric')
+
+				->rule('user_id', 'numeric');
 
 		if($post->check()) {
 			return true;

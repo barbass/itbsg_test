@@ -161,7 +161,7 @@
 
 				$(user_block).find('select[name=city] option[value='+city_id+']').attr('selected', 'selected');
 			} else {
-				clearUserBlock
+				clearUserBlock();
 			}
 		});
 
