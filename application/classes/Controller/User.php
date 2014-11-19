@@ -48,9 +48,14 @@ class Controller_User extends Controller_Template {
 			}
 
 			if ($result !== true) {
+				$messages = array();
+				foreach($result as $key=>$value) {
+					$messages[] = $value;
+				}
+
 				$response = array(
 					'success' => false,
-					'message' => implode('\n', $response),
+					'message' => implode('\n', $messages),
 				);
 			} else {
 				$response = array(

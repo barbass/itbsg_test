@@ -141,6 +141,6 @@ Cookie::$salt = 'random';
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'welcome',
+		'controller' => 'user',
 		'action'     => 'index',
 	));

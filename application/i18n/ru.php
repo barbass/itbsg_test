@@ -13,6 +13,7 @@ return array (
 	'row_delete' => 'Строка удалена',
 	'error_action_type' => 'Ошибка типа действия',
 	'empty_data' => 'Данных нет',
+	'close' => 'Закрыть',
 	'select_default' => '-- Выберите --',
 	'row_add' => 'Строка успешно вставлена',
 
@@ -31,4 +32,9 @@ return array (
 	'error_field_user_address' => 'Поле "Адресс" должно быть от 2 до 145 символов',
 	'error_field_user_city' => 'Не выбран город',
 	'error_field_user_email' => 'Неверное поле "Email"',
+
+	'E_EXISTING_USER_PRIVATE_CODE' => 'Пользователь с таким Личным номером уже есть в базе',
+	'E_NOT_EXISTING_USER' => 'Пользователь с таким Идентификатором не существует',
+	'E_NOT_EXISTING_CITY' => 'Город не найден в базе данных',
+	'E_DATABASE' => 'Ошибка в базе данных',
 );

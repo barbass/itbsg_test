@@ -111,6 +111,9 @@
 			<td>
 				<button type='button' class='btn btn-primary a_user_save'><?php echo __('save');?></button>
 			</td>
+			<td>
+				<button type='button' class='btn btn-primary a_user_close'><?php echo __('close');?></button>
+			</td>
 		</tr>
 
 		<input type='hidden' name='user_id' value=''>
@@ -157,12 +160,8 @@
 				$(user_block).find('select[name=country]').change();
 
 				$(user_block).find('select[name=city] option[value='+city_id+']').attr('selected', 'selected');
-
-
 			} else {
-				$(user_block).find('input').val('');
-				$(user_block).find('select[name=country] option[value=0]').attr('selected', 'selected');
-				$(user_block).find('select[name=city] option[value!=0]').remove();
+				clearUserBlock
 			}
 		});
 
@@ -175,6 +174,11 @@
 			}
 
 			userEdit(data);
+		});
+
+		$('.a_user_close').on('click', function() {
+			clearUserBlock();
+			$('.user_block').addClass('hide');
 		});
 
 		$('.user_block select[name=country]').on('change', function() {
@@ -223,7 +227,12 @@
 					$('.user_list').before("<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong><?php echo __('error_ajax_response');?></strong></div>");
 					return;
 				} else if (json['success'] && json['success'] == true) {
+
+					clearUserBlock();
+					$('.user_block').addClass('hide');
 					$('.user_list').before("<div class='alert alert-dismissable alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>"+json['message']+"</strong></div>");
+
+					setTimeout(function() {window.location.reload()}, 2000);
 					return;
 			} else {
 					$('.user_list').before("<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>"+json['message']+"</strong></div>");
@@ -333,5 +342,15 @@
 		}
 
 		return errors;
+	}
+
+	/**
+	 * Очищение данных
+	 */
+	function clearUserBlock() {
+		var user_block = $('.user_block');
+		$(user_block).find('input, textarea').val('');
+		$(user_block).find('select[name=country] option[value=0]').attr('selected', 'selected');
+		$(user_block).find('select[name=city] option[value!=0]').remove();
 	}
 </script>

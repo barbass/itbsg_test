@@ -16,7 +16,11 @@ class Model_User extends Model
 		return $result;
 	}
 
-
+	/**
+	 * Изменение пользователя
+	 * @param array
+	 * @return mixed (bool | array)
+	 */
 	public function edit($data) {
 		$valid = $this->validate($data);
 
@@ -24,8 +28,68 @@ class Model_User extends Model
 			return $valid;
 		}
 
+		$query = DB::query(Database::SELECT, 'SELECT edit_user(:user_id, :firstname, :lastname, :email, :private_code, :address, :city_id)')
+			->bind(':user_id', $data['user_id'])
+			->bind(':firstname', $data['firstname'])
+			->bind(':lastname', $data['lastname'])
+			->bind(':email', $data['email'])
+			->bind(':private_code', $data['private_code'])
+			->bind(':address', $data['address'])
+			->bind(':city_id', $data['city']);
+
+		try {
+			$query->execute();
+		} catch(Database_Exception $e) {
+			if (strpos($e->getMessage(), 'E_EXISTING_USER_PRIVATE_CODE')) {
+				return array(__('E_EXISTING_USER_PRIVATE_CODE'));
+			} elseif (strpos($e->getMessage(), 'E_NOT_EXISTING_USER')) {
+				return array(__('E_NOT_EXISTING_USER'));
+			} elseif (strpos($e->getMessage(), 'E_NOT_EXISTING_CITY')) {
+				return array(__('E_NOT_EXISTING_CITY'));
+			} else {
+				return array(__('E_DATABASE'));
+			}
+		}
+
 		return true;
- 	}
+	}
+
+	/**
+	 * Создание пользователя
+	 * @param array
+	 * @return mixed (bool | array)
+	 */
+	public function add($data) {
+		$valid = $this->validate($data);
+
+		if ($valid !== true) {
+			return $valid;
+		}
+
+		$query = DB::query(Database::SELECT, 'SELECT create_user(:firstname, :lastname, :email, :private_code, :address, :city_id)')
+			->bind(':firstname', $data['firstname'])
+			->bind(':lastname', $data['lastname'])
+			->bind(':email', $data['email'])
+			->bind(':private_code', $data['private_code'])
+			->bind(':address', $data['address'])
+			->bind(':city_id', $data['city']);
+
+		try {
+			$query->execute();
+		} catch(Database_Exception $e) {
+			if (strpos($e->getMessage(), 'E_EXISTING_USER_PRIVATE_CODE')) {
+				return array(__('E_EXISTING_USER_PRIVATE_CODE'));
+			} elseif (strpos($e->getMessage(), 'E_NOT_EXISTING_USER')) {
+				return array(__('E_NOT_EXISTING_USER'));
+			} elseif (strpos($e->getMessage(), 'E_NOT_EXISTING_CITY')) {
+				return array(__('E_NOT_EXISTING_CITY'));
+			} else {
+				return array(__('E_DATABASE'));
+			}
+		}
+
+		return true;
+	}
 
 	/**
 	 * Delete user
@@ -43,7 +107,7 @@ class Model_User extends Model
 	public function validate($data = array()) {
 		$post = Validation::factory($data);
 		$post ->rule('firstname', 'not_empty')
-				->rule('firstname', 'min_length', array(':value', 76))
+				->rule('firstname', 'min_length', array(':value', 2))
 				->rule('firstname', 'max_length', array(':value', 45))
 
 				->rule('lastname', 'not_empty')

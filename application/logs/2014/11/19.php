@@ -21,3 +21,12 @@
 #5 C:\xampp5.5\htdocs\test_itbsg\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #6 C:\xampp5.5\htdocs\test_itbsg\index.php(118): Kohana_Request->execute()
 #7 {main} in C:\xampp5.5\htdocs\test_itbsg\application\classes\Controller\User.php:50
+2014-11-19 13:40:41 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected ')' ~ APPPATH\classes\Model\User.php [ 33 ] in file:line
+2014-11-19 13:40:41 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-11-19 14:27:04 --- CRITICAL: ErrorException [ 1 ]: Cannot pass parameter 2 by reference ~ APPPATH\classes\Model\User.php [ 32 ] in file:line
+2014-11-19 14:27:04 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-11-19 14:28:07 --- CRITICAL: ErrorException [ 1 ]: Cannot pass parameter 2 by reference ~ APPPATH\classes\Model\User.php [ 32 ] in file:line
+2014-11-19 14:28:07 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
