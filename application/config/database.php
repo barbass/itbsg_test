@@ -13,7 +13,7 @@ return array
 			 * string   password    database password
 			 * boolean  persistent  use persistent connections?
 			 */
-			'dsn'        => 'pgsql:host=localhost;port=5432;dbname=itbsg',
+			'dsn'        => 'pgsql:host=localhost;port=5432;dbname=test_itbsg',
 			'username'   => 'postgres',
 			'password'   => 'root',
 			'persistent' => FALSE,
